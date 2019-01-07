@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name BFP650)(type Legacy)(uri ${KIPRJMOD}/BFP650/BFP650.lib)(options "")(descr ""))
+  (lib (name differential_bfp650_amp_hierarchy-rescue)(type Legacy)(uri ${KIPRJMOD}/differential_bfp650_amp_hierarchy-rescue.lib)(options "")(descr ""))
+  (lib (name d_sipm)(type Legacy)(uri ${KIPRJMOD}/d_sipm.lib)(options "")(descr ""))
+)
