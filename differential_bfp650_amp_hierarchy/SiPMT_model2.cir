@@ -1,0 +1,44 @@
+* Z:\home\phdgc\Solid\circuit_simulation\SiPMT\SiPMT_model2.asc
+
+.SUBCKT SiPMT  anode cathode ph Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=3599 Ith=100u Vbd=70.5
+
+* Bodge to simulate 10 SiPM in parallel....
+* .SUBCKT SiPMT  anode cathode ph Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=35990 Ith=100u Vbd=70.5
+
+* Parameters
+* .PARAM Cd=80f
+* .PARAM Cq=8f
+* .PARAM Cm=0.5f
+* .PARAM Rd=1k
+* .PARAM Rq=300k
+* .PARAM Nf=1
+* .PARAM Np=3599
+* .PARAM Ith=100u
+* .PARAM Vbd=70.5
+
+.model MYSW SW (Ron=0.1 Roff=1000Meg Vt=.4 Vh=-.0)
+
+* Passive cells
+Rqp cathode N002 {Rq/Np}
+Cqp cathode N002 {Cq*Np}
+Cdp N002 anode {Cd*Np}
+
+* Active cells
+Rq cathode N001 {Rq/Nf}
+Cq cathode N001 {Cq*Nf}
+Cd N001 anode {Cd*Nf}
+Rd N004 N006 {Rd/Nf}
+Vthr N005 N006 {Rd*Ith}
+Vbd N006 anode {Vbd}
+
+
+* E_AMP N005 N004 vol='LIMIT(V(N005,N004)*1E6,-2V,2V)'
+E_AMP N003 0 N004 N005 1000.0
+
+SQuench N001 N004 N003 0 MYSW
+STrigger N001 N004 ph 0 MYSW
+
+* Overall parasitic capacitance
+Cg cathode anode {Cg} 
+
+.ends

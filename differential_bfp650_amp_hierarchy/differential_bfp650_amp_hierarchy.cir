@@ -1,6 +1,7 @@
 .title KiCad schematic
 .include "Infineon-RFTransistor-SPICE.lib-SM-v02_10-EN.lib"
-V5 /vin- /vin+ dc 0 ac 10u pulse(0 1m 50n 10n 10n 50n)
+.include "SiPMT_model2.cir"
+V5 Net-_D1-Pad3_ 0 dc 0 ac 0 pulse(0V 1V 50n 1n 1n 1n)
 R21 /differentialAmplifierCSA/vout- /vin+ 100k
 C5 /differentialAmplifierCSA/vout- /vin+ 160p
 R20 /differentialAmplifierCSA/vout+ /vin- 100k
@@ -19,6 +20,12 @@ R24 /differentialAmplifierBuffer/Vin- Net-_C6-Pad1_ 10k
 R25 /differentialAmplifierBuffer/Vin+ Net-_C7-Pad1_ 10k
 C6 Net-_C6-Pad1_ /differentialAmplifierCSA/vout+ 160p
 C7 Net-_C7-Pad1_ /differentialAmplifierCSA/vout- 160p
+XD1 /va /vk Net-_D1-Pad3_ SiPMT
+R45 /vk Net-_R45-Pad2_ 100k
+R46 /va 0 100k
+C13 /vin- /vk 47n
+C14 /vin+ /va 47n
+V3 Net-_R45-Pad2_ 0 72.0
 XU5 Net-_R13-Pad2_ /differentialAmplifierCSA/Vb2 /differentialAmplifierCSA/ve /differentialAmplifierCSA/ve BFP650
 XU4 /differentialAmplifierCSA/vcc2 /differentialAmplifierCSA/vcb2 /differentialAmplifierCSA/vce2 /differentialAmplifierCSA/vce2 BFP650
 XU2 /differentialAmplifierCSA/vcc1 /differentialAmplifierCSA/vcb1 /differentialAmplifierCSA/vce1 /differentialAmplifierCSA/vce1 BFP650
