@@ -1,18 +1,12 @@
 .title KiCad schematic
 .include "../SiPMT_model2.cir"
-V2 Net-_D1-Pad3_ 0 dc 0 ac 0 pulse(0V 1V 50n 1n 1n 1n)
-XD1 /va /vk Net-_D1-Pad3_ SiPMT
-R1 /vk Net-_R1-Pad2_ 100k
-R2 /va 0 100k
-V1 Net-_R1-Pad2_ 0 72.0
-R3 0 Net-_C1-Pad1_ 100
-C1 Net-_C1-Pad1_ /vk 100n
-C2 Net-_C2-Pad1_ /va 100n
-R4 0 Net-_C2-Pad1_ 100
+V2 Net-_D1-Pad3_ 0 dc 0 ac 0 pulse(0V 1V 10n 1n 1n 1n)
+XD1 /va /vk Net-_D1-Pad3_ SiPMT Np=35990
+R2 /va 0 50
+V1 /vk 0 72.0
 .control
 option savecurrents
-tran 1ns 500ns
-write
+tran 1ns 100ns
 write
 .endc
 .end

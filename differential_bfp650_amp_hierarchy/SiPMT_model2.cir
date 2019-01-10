@@ -1,9 +1,9 @@
 * Z:\home\phdgc\Solid\circuit_simulation\SiPMT\SiPMT_model2.asc
 
-.SUBCKT SiPMT  anode cathode ph Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=3599 Ith=100u Vbd=70.5
+* .SUBCKT SiPMT  anode cathode ph Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=3599 Ith=100u Vbd=70.5
 
 * Bodge to simulate 10 SiPM in parallel....
-* .SUBCKT SiPMT  anode cathode ph Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=35990 Ith=100u Vbd=70.5
+.SUBCKT SiPMT  anode cathode ph Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=35990 Ith=100u Vbd=70.5
 
 * Parameters
 * .PARAM Cd=80f
