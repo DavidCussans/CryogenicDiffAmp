@@ -1,0 +1,5 @@
+.SUBCKT VCVS 1 2 3 4
+
+E 1 2 3 4 -1.0
+
+.ENDS VCVS

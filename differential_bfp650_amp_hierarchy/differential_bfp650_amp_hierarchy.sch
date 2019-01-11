@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 1 3
+Sheet 1 4
 Title ""
 Date ""
 Rev ""
@@ -284,7 +284,7 @@ F 3 "" H 14250 3600 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Text Notes 13750 5100 0    50   ~ 0
-+PSPICE\n.control\noptions savecurrent\ntran 5ns 5us\nwrite\n.endc
++PSPICE\n.control\noptions savecurrent\n* Hack reltol to get NGSpice to converge\noptions reltol=0.005\noptions temp=-186\ntran 5ns 5us\nplot v("/vrx+") v("/vrx-")\nplot v("/differentialAmplifierBuffer/vbuf1")\nplot v("/differentialAmplifierBuffer/vcoutm")\nplot i(l.xu7.lc) i(l.xu12.lc)\nplot i(l.xu7.le) i(l.xu12.le)\nwrite\n.endc
 $Sheet
 S 8150 2500 1850 950 
 U 5C34E9CA
@@ -540,10 +540,10 @@ L d_sipm:D_SiPM D1
 U 1 1 5C338FC0
 P 2250 3100
 F 0 "D1" V 2210 3021 50  0000 R CNN
-F 1 "D_SiPM" V 2301 3021 50  0000 R CNN
+F 1 "D_SiPM" V 2050 3500 50  0001 R CNN
 F 2 "" H 2200 3100 50  0001 C CNN
 F 3 "~" H 2200 3100 50  0001 C CNN
-F 4 "SiPMT" V 2250 3100 50  0001 C CNN "Spice_Model"
+F 4 "SiPMT Nf=100" V 2100 3500 50  0000 C CNN "Spice_Model"
 F 5 "X" V 2250 3100 50  0001 C CNN "Spice_Primitive"
 F 6 "Y" V 2250 3100 50  0001 C CNN "Spice_Netlist_Enabled"
 F 7 "SiPMT_model2.cir" V 2250 3100 50  0001 C CNN "Spice_Lib_File"
@@ -1143,6 +1143,375 @@ Text Notes 12900 9600 0    50   ~ 0
 vrx+ and vrx- are the output to the amplifier/digitizer
 Text Notes 14600 6750 0    50   ~ 0
 v1,v2 are the low voltage supplies\nfor the amplifier\nv3 is the bias for the SiPMs
-Text Notes 850  4750 0    50   ~ 0
+Text Notes 800  4600 0    50   ~ 0
 V5 represents a pulse of light\nthat triggers the SiPM\n(causes switch to close inside model)
+Text Notes 14100 1150 0    50   ~ 0
+V4 and V6 are for simulation only.\nIn a real circuit, power for amplifier \nsupplied down cable\n( NGSpice convergence problems if power\nsimulation down cable )
+$Sheet
+S 3500 6100 1850 950 
+U 5C3776E7
+F0 "differentialAmplifierCSA1" 50
+F1 "differentialAmplifier.sch" 50
+F2 "Vcc" I L 3500 6250 50 
+F3 "Vee" I L 3500 6900 50 
+F4 "Vin-" I L 3500 6450 50 
+F5 "vout+" O R 5350 6450 50 
+F6 "vout-" O R 5350 6700 50 
+F7 "Vin+" I L 3500 6700 50 
+$EndSheet
+Wire Wire Line
+	5350 6450 5750 6450
+Wire Wire Line
+	5350 6700 5750 6700
+Wire Wire Line
+	2200 6350 2400 6350
+Wire Wire Line
+	3100 6350 3100 6450
+Wire Wire Line
+	3100 6450 3500 6450
+Wire Wire Line
+	2200 6950 2400 6950
+Wire Wire Line
+	3100 6950 3100 6700
+Text Label 2950 6950 2    50   ~ 0
+vin1+
+Text Label 2900 6350 2    50   ~ 0
+vin1-
+$Comp
+L Device:R R58
+U 1 1 5C3776FF
+P 4400 7600
+F 0 "R58" V 4193 7600 50  0000 C CNN
+F 1 "100k" V 4284 7600 50  0000 C CNN
+F 2 "" V 4330 7600 50  0001 C CNN
+F 3 "~" H 4400 7600 50  0001 C CNN
+	1    4400 7600
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C22
+U 1 1 5C377705
+P 4400 8050
+F 0 "C22" V 4148 8050 50  0000 C CNN
+F 1 "160pF" V 4239 8050 50  0000 C CNN
+F 2 "" H 4438 7900 50  0001 C CNN
+F 3 "~" H 4400 8050 50  0001 C CNN
+	1    4400 8050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4550 7600 5750 7600
+Wire Wire Line
+	5750 7600 5750 6700
+Connection ~ 5750 6700
+Wire Wire Line
+	5750 8050 4550 8050
+Wire Wire Line
+	5750 7600 5750 8050
+Connection ~ 5750 7600
+Wire Wire Line
+	4250 7600 3100 7600
+Wire Wire Line
+	3100 7600 3100 6950
+Connection ~ 3100 6950
+Wire Wire Line
+	4250 8050 3100 8050
+Wire Wire Line
+	3100 8050 3100 7600
+Connection ~ 3100 7600
+Wire Wire Line
+	3500 6900 3300 6900
+Wire Wire Line
+	3300 6900 3300 7300
+$Comp
+L power:VEE #PWR0105
+U 1 1 5C377719
+P 3300 7300
+F 0 "#PWR0105" H 3300 7150 50  0001 C CNN
+F 1 "VEE" H 3318 7473 50  0000 C CNN
+F 2 "" H 3300 7300 50  0001 C CNN
+F 3 "" H 3300 7300 50  0001 C CNN
+	1    3300 7300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R57
+U 1 1 5C37771F
+P 4400 5000
+F 0 "R57" V 4193 5000 50  0000 C CNN
+F 1 "100k" V 4284 5000 50  0000 C CNN
+F 2 "" V 4330 5000 50  0001 C CNN
+F 3 "~" H 4400 5000 50  0001 C CNN
+	1    4400 5000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C21
+U 1 1 5C377725
+P 4400 5450
+F 0 "C21" V 4148 5450 50  0000 C CNN
+F 1 "160pF" V 4239 5450 50  0000 C CNN
+F 2 "" H 4438 5300 50  0001 C CNN
+F 3 "~" H 4400 5450 50  0001 C CNN
+	1    4400 5450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4550 5000 5750 5000
+Wire Wire Line
+	5750 5450 4550 5450
+Wire Wire Line
+	4250 5000 3100 5000
+Wire Wire Line
+	4250 5450 3100 5450
+Wire Wire Line
+	5750 5000 5750 5450
+Wire Wire Line
+	5750 5450 5750 6450
+Connection ~ 5750 5450
+Connection ~ 5750 6450
+Wire Wire Line
+	3100 5000 3100 5450
+Wire Wire Line
+	3100 5450 3100 6350
+Connection ~ 3100 5450
+Connection ~ 3100 6350
+$Comp
+L Device:R R55
+U 1 1 5C377737
+P 2350 5450
+F 0 "R55" V 2143 5450 50  0000 C CNN
+F 1 "130k" V 2234 5450 50  0000 C CNN
+F 2 "" V 2280 5450 50  0001 C CNN
+F 3 "~" H 2350 5450 50  0001 C CNN
+	1    2350 5450
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VEE #PWR0106
+U 1 1 5C37773D
+P 1950 5450
+F 0 "#PWR0106" H 1950 5300 50  0001 C CNN
+F 1 "VEE" V 1968 5577 50  0000 L CNN
+F 2 "" H 1950 5450 50  0001 C CNN
+F 3 "" H 1950 5450 50  0001 C CNN
+	1    1950 5450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2500 5450 3100 5450
+Wire Wire Line
+	1950 5450 2200 5450
+$Comp
+L Device:R R56
+U 1 1 5C377745
+P 2350 7600
+F 0 "R56" V 2143 7600 50  0000 C CNN
+F 1 "130k" V 2234 7600 50  0000 C CNN
+F 2 "" V 2280 7600 50  0001 C CNN
+F 3 "~" H 2350 7600 50  0001 C CNN
+	1    2350 7600
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VEE #PWR0107
+U 1 1 5C37774B
+P 1950 7600
+F 0 "#PWR0107" H 1950 7450 50  0001 C CNN
+F 1 "VEE" V 1968 7727 50  0000 L CNN
+F 2 "" H 1950 7600 50  0001 C CNN
+F 3 "" H 1950 7600 50  0001 C CNN
+	1    1950 7600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2500 7600 3100 7600
+Wire Wire Line
+	1950 7600 2200 7600
+Wire Wire Line
+	3500 6250 3300 6250
+Wire Wire Line
+	3300 6250 3300 5750
+$Comp
+L power:VCC #PWR0108
+U 1 1 5C377755
+P 3300 5750
+F 0 "#PWR0108" H 3300 5600 50  0001 C CNN
+F 1 "VCC" H 3317 5923 50  0000 C CNN
+F 2 "" H 3300 5750 50  0001 C CNN
+F 3 "" H 3300 5750 50  0001 C CNN
+	1    3300 5750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3500 6700 3100 6700
+$Comp
+L Device:R R59
+U 1 1 5C377778
+P 7300 6450
+F 0 "R59" V 7093 6450 50  0000 C CNN
+F 1 "2k" V 7184 6450 50  0000 C CNN
+F 2 "" V 7230 6450 50  0001 C CNN
+F 3 "~" H 7300 6450 50  0001 C CNN
+	1    7300 6450
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R60
+U 1 1 5C37777E
+P 7300 6700
+F 0 "R60" V 7450 6700 50  0000 C CNN
+F 1 "2k" V 7550 6700 50  0000 C CNN
+F 2 "" V 7230 6700 50  0001 C CNN
+F 3 "~" H 7300 6700 50  0001 C CNN
+	1    7300 6700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C23
+U 1 1 5C377784
+P 6700 6450
+F 0 "C23" V 6448 6450 50  0000 C CNN
+F 1 "800pF" V 6539 6450 50  0000 C CNN
+F 2 "" H 6738 6300 50  0001 C CNN
+F 3 "~" H 6700 6450 50  0001 C CNN
+	1    6700 6450
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C31
+U 1 1 5C37778A
+P 6700 6700
+F 0 "C31" V 6850 6700 50  0000 C CNN
+F 1 "800pF" V 6950 6700 50  0000 C CNN
+F 2 "" H 6738 6550 50  0001 C CNN
+F 3 "~" H 6700 6700 50  0001 C CNN
+	1    6700 6700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5750 6450 6550 6450
+Wire Wire Line
+	6850 6450 7150 6450
+Wire Wire Line
+	7450 6450 7700 6450
+Wire Wire Line
+	6850 6700 7150 6700
+Wire Wire Line
+	7450 6700 7700 6700
+Wire Wire Line
+	5750 6700 6550 6700
+Wire Wire Line
+	2200 6500 2200 6350
+Wire Wire Line
+	2200 6800 2200 6950
+$Comp
+L Device:R R53
+U 1 1 5C3777AB
+P 2200 6100
+F 0 "R53" H 2130 6054 50  0000 R CNN
+F 1 "100k" H 2130 6145 50  0000 R CNN
+F 2 "" V 2130 6100 50  0001 C CNN
+F 3 "~" H 2200 6100 50  0001 C CNN
+	1    2200 6100
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R54
+U 1 1 5C3777B1
+P 2200 7200
+F 0 "R54" H 2270 7246 50  0000 L CNN
+F 1 "100k" H 2270 7155 50  0000 L CNN
+F 2 "" V 2130 7200 50  0001 C CNN
+F 3 "~" H 2200 7200 50  0001 C CNN
+	1    2200 7200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C19
+U 1 1 5C3777B7
+P 2550 6350
+F 0 "C19" V 2298 6350 50  0000 C CNN
+F 1 "47n" V 2389 6350 50  0000 C CNN
+F 2 "" H 2588 6200 50  0001 C CNN
+F 3 "~" H 2550 6350 50  0001 C CNN
+	1    2550 6350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2700 6350 3100 6350
+$Comp
+L Device:C C20
+U 1 1 5C3777BE
+P 2550 6950
+F 0 "C20" V 2298 6950 50  0000 C CNN
+F 1 "47n" V 2389 6950 50  0000 C CNN
+F 2 "" H 2588 6800 50  0001 C CNN
+F 3 "~" H 2550 6950 50  0001 C CNN
+	1    2550 6950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2700 6950 3100 6950
+$Comp
+L pspice:0 #GND0111
+U 1 1 5C3777C5
+P 2200 7450
+F 0 "#GND0111" H 2200 7350 50  0001 C CNN
+F 1 "0" H 2200 7537 50  0000 C CNN
+F 2 "" H 2200 7450 50  0001 C CNN
+F 3 "~" H 2200 7450 50  0001 C CNN
+	1    2200 7450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 7450 2200 7350
+Wire Wire Line
+	2200 7050 2200 6950
+Connection ~ 2200 6950
+Wire Wire Line
+	2200 6350 2200 6250
+Connection ~ 2200 6350
+Wire Wire Line
+	2200 5950 2200 5800
+Wire Wire Line
+	2200 5800 1350 5800
+Text Label 2200 6450 0    50   ~ 0
+vk1
+Text Label 2200 6850 0    50   ~ 0
+va1
+Text Label 6000 6450 0    50   ~ 0
+vcsa1+
+Text Label 6000 6700 0    50   ~ 0
+vcsa1-
+$Comp
+L power:HT #PWR0110
+U 1 1 5C3777D6
+P 1350 5800
+F 0 "#PWR0110" H 1350 5920 50  0001 C CNN
+F 1 "HT" H 1370 5943 50  0000 C CNN
+F 2 "" H 1350 5800 50  0001 C CNN
+F 3 "" H 1350 5800 50  0001 C CNN
+	1    1350 5800
+	1    0    0    -1  
+$EndComp
+Text Label 7700 6450 0    50   ~ 0
+vbufin+
+Text Label 7700 6700 0    50   ~ 0
+vbufin-
+$Comp
+L Device:C C37
+U 1 1 5C3ADB50
+P 2200 6650
+F 0 "C37" H 1900 6700 50  0000 L CNN
+F 1 "3.2n" H 1900 6600 50  0000 L CNN
+F 2 "" H 2238 6500 50  0001 C CNN
+F 3 "~" H 2200 6650 50  0001 C CNN
+	1    2200 6650
+	1    0    0    -1  
+$EndComp
+Text Notes 700  6700 0    50   ~ 0
+3.2nF capacitor is a crude \nmodel of 10 3x3mm SiPM in\nparallel
+Text Notes 11950 10500 0    100  ~ 0
+Differential Cryogenic Pre-amplifier for SiPM\nDifferential signal of approximately \n1mV / Pixel Avalanche 
 $EndSCHEMATC

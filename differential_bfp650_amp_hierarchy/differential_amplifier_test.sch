@@ -1,0 +1,244 @@
+EESchema Schematic File Version 4
+LIBS:differential_bfp650_amp-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 2
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L pspice:0 #GND01
+U 1 1 5C23E32E
+P 5350 4300
+F 0 "#GND01" H 5350 4200 50  0001 C CNN
+F 1 "0" H 5350 4387 50  0000 C CNN
+F 2 "" H 5350 4300 50  0001 C CNN
+F 3 "~" H 5350 4300 50  0001 C CNN
+	1    5350 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L pspice:VSOURCE V1
+U 1 1 5C23F941
+P 5350 3500
+F 0 "V1" H 5578 3546 50  0000 L CNN
+F 1 "VSOURCE" H 5578 3455 50  0000 L CNN
+F 2 "" H 5350 3500 50  0001 C CNN
+F 3 "~" H 5350 3500 50  0001 C CNN
+F 4 "V" H 5350 3500 50  0001 C CNN "Spice_Primitive"
+F 5 "dc -0.8" H 5350 3500 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 5350 3500 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    5350 3500
+	1    0    0    -1  
+$EndComp
+Text Label 5950 2900 0    50   ~ 0
+Vcm
+$Comp
+L pspice:VSOURCE V2
+U 1 1 5C267A83
+P 6600 2500
+F 0 "V2" V 6097 2500 50  0000 C CNN
+F 1 "VSOURCE" V 6188 2500 50  0000 C CNN
+F 2 "" H 6600 2500 50  0001 C CNN
+F 3 "~" H 6600 2500 50  0001 C CNN
+F 4 "V" H 6600 2500 50  0001 C CNN "Spice_Primitive"
+F 5 "dc 0 ac 10u pulse(0 1m 50n 1n 1n 50n)" H 6600 2500 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 6600 2500 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    6600 2500
+	1    0    0    -1  
+$EndComp
+Text Notes 750  900  0    50   ~ 0
+-186 degC Vin = -1.07V , Vbufin = -1.2V\n+25 degC Vin = -1.3V , Vbufin = -1.28V
+Wire Wire Line
+	5350 3800 5350 4300
+Wire Wire Line
+	6600 3000 6600 2900
+Wire Wire Line
+	6800 3000 6800 2900
+Wire Wire Line
+	6800 2900 6600 2900
+Connection ~ 6600 2900
+Wire Wire Line
+	6600 2900 6600 2800
+Wire Wire Line
+	6600 2200 6600 2150
+Wire Wire Line
+	6600 1900 7350 1900
+Wire Wire Line
+	6600 2150 7000 2150
+Wire Wire Line
+	7000 2150 7000 3300
+Wire Wire Line
+	7000 3300 6800 3300
+Connection ~ 6600 2150
+Wire Wire Line
+	6600 2150 6600 1900
+Wire Wire Line
+	5350 2900 6600 2900
+Wire Wire Line
+	5350 2900 5350 3200
+Text Label 7350 1900 0    50   ~ 0
+vin-
+Wire Wire Line
+	6600 3300 6600 3600
+Wire Wire Line
+	6600 3600 7350 3600
+Text Label 7350 3600 0    50   ~ 0
+vin+
+$Comp
+L vcvs:VCVS E1
+U 1 1 5C26DBE4
+P 6700 3150
+F 0 "E1" V 7040 3150 50  0000 C CNN
+F 1 "VCVS" H 6700 3450 50  0001 C CNN
+F 2 "" V 6430 2400 50  0000 C CNN
+F 3 "" H 6500 2400 50  0000 C CNN
+F 4 "1" V 6949 3150 50  0000 C CNN "gain"
+F 5 "X" H 6700 3150 50  0001 C CNN "Spice_Primitive"
+F 6 "VCVS" H 6700 3150 50  0001 C CNN "Spice_Model"
+F 7 "Y" H 6700 3150 50  0001 C CNN "Spice_Netlist_Enabled"
+F 8 "vcvs.cir" H 6700 3150 50  0001 C CNN "Spice_Lib_File"
+	1    6700 3150
+	-1   0    0    1   
+$EndComp
+$Sheet
+S 8550 2400 1100 700 
+U 5C3A4587
+F0 "differentialAmplifier" 50
+F1 "differentialAmplifier.sch" 50
+F2 "Vcc" I L 8550 2500 50 
+F3 "Vee" I L 8550 3000 50 
+F4 "Vin-" I L 8550 2650 50 
+F5 "Vin+" I L 8550 2850 50 
+F6 "vout+" O R 9650 2650 50 
+F7 "vout-" O R 9650 2850 50 
+$EndSheet
+Wire Wire Line
+	8550 2650 7350 2650
+Wire Wire Line
+	7350 2650 7350 1900
+Wire Wire Line
+	8550 2850 7350 2850
+Wire Wire Line
+	7350 2850 7350 3600
+Wire Wire Line
+	8550 2500 8350 2500
+Wire Wire Line
+	8350 2500 8350 2100
+Wire Wire Line
+	8550 3000 8400 3000
+Wire Wire Line
+	8400 3000 8400 3450
+Wire Wire Line
+	9650 2650 9950 2650
+Wire Wire Line
+	9650 2850 9950 2850
+$Comp
+L power:VCC #PWR0101
+U 1 1 5C3A5301
+P 8350 2100
+F 0 "#PWR0101" H 8350 1950 50  0001 C CNN
+F 1 "VCC" H 8367 2273 50  0000 C CNN
+F 2 "" H 8350 2100 50  0001 C CNN
+F 3 "" H 8350 2100 50  0001 C CNN
+	1    8350 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VEE #PWR0102
+U 1 1 5C3A536B
+P 8400 3450
+F 0 "#PWR0102" H 8400 3300 50  0001 C CNN
+F 1 "VEE" H 8418 3623 50  0000 C CNN
+F 2 "" H 8400 3450 50  0001 C CNN
+F 3 "" H 8400 3450 50  0001 C CNN
+	1    8400 3450
+	-1   0    0    1   
+$EndComp
+Text Label 9950 2650 0    50   ~ 0
+vout+
+Text Label 9950 2850 0    50   ~ 0
+vout-
+$Comp
+L pspice:VSOURCE V3
+U 1 1 5C3A59C7
+P 2950 2400
+F 0 "V3" H 3178 2446 50  0000 L CNN
+F 1 "VSOURCE" H 3178 2355 50  0000 L CNN
+F 2 "" H 2950 2400 50  0001 C CNN
+F 3 "~" H 2950 2400 50  0001 C CNN
+F 4 "V" H 2950 2400 50  0001 C CNN "Spice_Primitive"
+F 5 "dc 7" H 2950 2400 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 2950 2400 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    2950 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 1800 2950 2100
+$Comp
+L pspice:VSOURCE V4
+U 1 1 5C3A5E1E
+P 2950 3450
+F 0 "V4" H 3178 3496 50  0000 L CNN
+F 1 "VSOURCE" H 3178 3405 50  0000 L CNN
+F 2 "" H 2950 3450 50  0001 C CNN
+F 3 "~" H 2950 3450 50  0001 C CNN
+F 4 "V" H 2950 3450 50  0001 C CNN "Spice_Primitive"
+F 5 "dc 7" H 2950 3450 50  0001 C CNN "Spice_Model"
+F 6 "Y" H 2950 3450 50  0001 C CNN "Spice_Netlist_Enabled"
+	1    2950 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 3750 2950 4250
+Wire Wire Line
+	2950 2700 2950 2950
+Wire Wire Line
+	2950 2950 2100 2950
+Wire Wire Line
+	2100 2950 2100 3150
+Connection ~ 2950 2950
+Wire Wire Line
+	2950 2950 2950 3150
+$Comp
+L pspice:0 #GND0101
+U 1 1 5C3A690A
+P 2100 3150
+F 0 "#GND0101" H 2100 3050 50  0001 C CNN
+F 1 "0" H 2100 3237 50  0000 C CNN
+F 2 "" H 2100 3150 50  0001 C CNN
+F 3 "~" H 2100 3150 50  0001 C CNN
+	1    2100 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR0103
+U 1 1 5C3A69E7
+P 2950 1800
+F 0 "#PWR0103" H 2950 1650 50  0001 C CNN
+F 1 "VCC" H 2967 1973 50  0000 C CNN
+F 2 "" H 2950 1800 50  0001 C CNN
+F 3 "" H 2950 1800 50  0001 C CNN
+	1    2950 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VEE #PWR0104
+U 1 1 5C3A6A7E
+P 2950 4250
+F 0 "#PWR0104" H 2950 4100 50  0001 C CNN
+F 1 "VEE" H 2968 4423 50  0000 C CNN
+F 2 "" H 2950 4250 50  0001 C CNN
+F 3 "" H 2950 4250 50  0001 C CNN
+	1    2950 4250
+	-1   0    0    1   
+$EndComp
+$EndSCHEMATC

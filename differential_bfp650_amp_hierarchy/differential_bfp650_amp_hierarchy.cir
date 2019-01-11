@@ -20,7 +20,7 @@ R24 /vbufin+ Net-_C6-Pad1_ 2k
 R25 /vbufin- Net-_C7-Pad1_ 2k
 C6 Net-_C6-Pad1_ /vcsa0+ 800p
 C7 Net-_C7-Pad1_ /vcsa0- 800p
-XD1 /va /vk Net-_D1-Pad3_ SiPMT
+XD1 /va /vk Net-_D1-Pad3_ SiPMT Nf=100
 R45 /vk HT 100k
 R46 /va 0 100k
 C13 /vin- /vk 47n
@@ -29,7 +29,7 @@ R72 /vrx+ 0 50
 R73 0 /vrx- 50
 C24 /vrx+ /vline+ 100n
 C25 /vrx- /vline- 100n
-V3 Net-_V1-Pad2_ 0 72.0
+V3 Net-_V1-Pad2_ 0 dc 72.0
 C28 /vline+ /vout+ 100n
 C29 /vline- /vout- 100n
 L3 Net-_L3-Pad1_ /vline+ 100u
@@ -45,6 +45,21 @@ V4 VCC 0 dc 7
 V6 0 VEE dc 7
 R47 /vout- /vbufout- 50
 R48 /vout+ /vbufout+ 50
+R58 /vcsa1- /vin1+ 100k
+C22 /vcsa1- /vin1+ 160p
+R57 /vcsa1+ /vin1- 100k
+C21 /vcsa1+ /vin1- 160p
+R55 /vin1- VEE 130k
+R56 /vin1+ VEE 130k
+R59 /vbufin+ Net-_C23-Pad1_ 2k
+R60 /vbufin- Net-_C31-Pad1_ 2k
+C23 Net-_C23-Pad1_ /vcsa1+ 800p
+C31 Net-_C31-Pad1_ /vcsa1- 800p
+R53 /vk1 HT 100k
+R54 /va1 0 100k
+C19 /vin1- /vk1 47n
+C20 /vin1+ /va1 47n
+C37 /vk1 /va1 3.2n
 XU5 Net-_R13-Pad2_ /differentialAmplifierCSA0/Vb2 /differentialAmplifierCSA0/ve /differentialAmplifierCSA0/ve BFP650
 XU4 /differentialAmplifierCSA0/vcc2 /differentialAmplifierCSA0/vcb2 /differentialAmplifierCSA0/vce2 /differentialAmplifierCSA0/vce2 BFP650
 XU2 /differentialAmplifierCSA0/vcc1 /differentialAmplifierCSA0/vcb1 /differentialAmplifierCSA0/vce1 /differentialAmplifierCSA0/vce1 BFP650
@@ -54,26 +69,26 @@ R12 VCC /differentialAmplifierCSA0/vcc2 1K
 R9 /differentialAmplifierCSA0/ve VEE 1k
 R7 /vin- /differentialAmplifierCSA0/Vb1 10
 R11 /differentialAmplifierCSA0/Vb2 /vin+ 10
-R13 /differentialAmplifierCSA0/vce2 Net-_R13-Pad2_ 10
-R5 /differentialAmplifierCSA0/vce1 Net-_R5-Pad2_ 10
+R13 /differentialAmplifierCSA0/vce2 Net-_R13-Pad2_ 20
+R5 /differentialAmplifierCSA0/vce1 Net-_R5-Pad2_ 20
 R10 /differentialAmplifierCSA0/vcb2 /differentialAmplifierCSA0/vcb 20
 R8 /differentialAmplifierCSA0/vcb /differentialAmplifierCSA0/vcb1 20
-C2 VCC /differentialAmplifierCSA0/vcc2 15p
-C1 VCC /differentialAmplifierCSA0/vcc1 15p
+C2 VCC /differentialAmplifierCSA0/vcc2 35p
+C1 VCC /differentialAmplifierCSA0/vcc1 35p
 XU6 /differentialAmplifierCSA0/vcoutp /differentialAmplifierCSA0/vbuf2 /vcsa0- /vcsa0- BFP650
 XU1 /differentialAmplifierCSA0/vcoutm /differentialAmplifierCSA0/vbuf1 /vcsa0+ /vcsa0+ BFP650
-R16 VCC Net-_C16-Pad1_ 100
-R1 VCC Net-_C15-Pad1_ 100
-R3 /differentialAmplifierCSA0/vcc1 /differentialAmplifierCSA0/vbuf1 10
-R15 /differentialAmplifierCSA0/vbuf2 /differentialAmplifierCSA0/vcc2 10
-R17 /vcsa0- VEE 8k
-R2 /vcsa0+ VEE 8k
+R16 VCC Net-_C16-Pad1_ 25
+R1 VCC Net-_C15-Pad1_ 25
+R3 /differentialAmplifierCSA0/vcc1 /differentialAmplifierCSA0/vbuf1 20
+R15 /differentialAmplifierCSA0/vbuf2 /differentialAmplifierCSA0/vcc2 20
+R17 /vcsa0- VEE 2k
+R2 /vcsa0+ VEE 4k
 R6 VCC /differentialAmplifierCSA0/vcb 10k
 R14 /differentialAmplifierCSA0/vcb VEE 18k
 C3 /differentialAmplifierCSA0/vcb 0 10u
-R50 Net-_C16-Pad1_ /differentialAmplifierCSA0/vcoutp 50
+R50 Net-_C16-Pad1_ /differentialAmplifierCSA0/vcoutp 20
 C15 Net-_C15-Pad1_ 0 10u
-R49 Net-_C15-Pad1_ /differentialAmplifierCSA0/vcoutm 50
+R49 Net-_C15-Pad1_ /differentialAmplifierCSA0/vcoutm 20
 C16 Net-_C16-Pad1_ 0 10u
 XU11 Net-_R39-Pad2_ /differentialAmplifierBuffer/Vb2 /differentialAmplifierBuffer/ve /differentialAmplifierBuffer/ve BFP650
 XU10 /differentialAmplifierBuffer/vcc2 /differentialAmplifierBuffer/vcb2 /differentialAmplifierBuffer/vce2 /differentialAmplifierBuffer/vce2 BFP650
@@ -84,33 +99,67 @@ R38 VCC /differentialAmplifierBuffer/vcc2 1K
 R35 /differentialAmplifierBuffer/ve VEE 1k
 R33 /vbufin+ /differentialAmplifierBuffer/Vb1 10
 R37 /differentialAmplifierBuffer/Vb2 /vbufin- 10
-R39 /differentialAmplifierBuffer/vce2 Net-_R39-Pad2_ 10
-R32 /differentialAmplifierBuffer/vce1 Net-_R32-Pad2_ 10
+R39 /differentialAmplifierBuffer/vce2 Net-_R39-Pad2_ 20
+R32 /differentialAmplifierBuffer/vce1 Net-_R32-Pad2_ 20
 R36 /differentialAmplifierBuffer/vcb2 /differentialAmplifierBuffer/vcb 20
 R34 /differentialAmplifierBuffer/vcb /differentialAmplifierBuffer/vcb1 20
-C11 VCC /differentialAmplifierBuffer/vcc2 15p
-C10 VCC /differentialAmplifierBuffer/vcc1 15p
+C11 VCC /differentialAmplifierBuffer/vcc2 35p
+C10 VCC /differentialAmplifierBuffer/vcc1 35p
 XU12 /differentialAmplifierBuffer/vcoutp /differentialAmplifierBuffer/vbuf2 /vbufout+ /vbufout+ BFP650
 XU7 /differentialAmplifierBuffer/vcoutm /differentialAmplifierBuffer/vbuf1 /vbufout- /vbufout- BFP650
-R41 VCC Net-_C18-Pad1_ 100
-R28 VCC Net-_C17-Pad1_ 100
-R30 /differentialAmplifierBuffer/vcc1 /differentialAmplifierBuffer/vbuf1 10
-R40 /differentialAmplifierBuffer/vbuf2 /differentialAmplifierBuffer/vcc2 10
-R42 /vbufout+ VEE 8k
-R29 /vbufout- VEE 8k
+R41 VCC Net-_C18-Pad1_ 25
+R28 VCC Net-_C17-Pad1_ 25
+R30 /differentialAmplifierBuffer/vcc1 /differentialAmplifierBuffer/vbuf1 20
+R40 /differentialAmplifierBuffer/vbuf2 /differentialAmplifierBuffer/vcc2 20
+R42 /vbufout+ VEE 2k
+R29 /vbufout- VEE 2k
 R43 VCC /differentialAmplifierBuffer/vcb 10k
 R44 /differentialAmplifierBuffer/vcb VEE 18k
 C12 /differentialAmplifierBuffer/vcb 0 10u
-R52 Net-_C18-Pad1_ /differentialAmplifierBuffer/vcoutp 50
+R52 Net-_C18-Pad1_ /differentialAmplifierBuffer/vcoutp 20
 C17 Net-_C17-Pad1_ 0 10u
-R51 Net-_C17-Pad1_ /differentialAmplifierBuffer/vcoutm 50
+R51 Net-_C17-Pad1_ /differentialAmplifierBuffer/vcoutm 20
 C18 Net-_C18-Pad1_ 0 10u
+XU17 Net-_R77-Pad2_ /differentialAmplifierCSA1/Vb2 /differentialAmplifierCSA1/ve /differentialAmplifierCSA1/ve BFP650
+XU16 /differentialAmplifierCSA1/vcc2 /differentialAmplifierCSA1/vcb2 /differentialAmplifierCSA1/vce2 /differentialAmplifierCSA1/vce2 BFP650
+XU14 /differentialAmplifierCSA1/vcc1 /differentialAmplifierCSA1/vcb1 /differentialAmplifierCSA1/vce1 /differentialAmplifierCSA1/vce1 BFP650
+XU15 Net-_R66-Pad2_ /differentialAmplifierCSA1/Vb1 /differentialAmplifierCSA1/ve /differentialAmplifierCSA1/ve BFP650
+R65 VCC /differentialAmplifierCSA1/vcc1 1K
+R76 VCC /differentialAmplifierCSA1/vcc2 1K
+R69 /differentialAmplifierCSA1/ve VEE 1k
+R67 /vin1- /differentialAmplifierCSA1/Vb1 10
+R71 /differentialAmplifierCSA1/Vb2 /vin1+ 10
+R77 /differentialAmplifierCSA1/vce2 Net-_R77-Pad2_ 20
+R66 /differentialAmplifierCSA1/vce1 Net-_R66-Pad2_ 20
+R70 /differentialAmplifierCSA1/vcb2 /differentialAmplifierCSA1/vcb 20
+R68 /differentialAmplifierCSA1/vcb /differentialAmplifierCSA1/vcb1 20
+C34 VCC /differentialAmplifierCSA1/vcc2 35p
+C33 VCC /differentialAmplifierCSA1/vcc1 35p
+XU18 /differentialAmplifierCSA1/vcoutp /differentialAmplifierCSA1/vbuf2 /vcsa1- /vcsa1- BFP650
+XU13 /differentialAmplifierCSA1/vcoutm /differentialAmplifierCSA1/vbuf1 /vcsa1+ /vcsa1+ BFP650
+R79 VCC Net-_C36-Pad1_ 25
+R61 VCC Net-_C32-Pad1_ 25
+R64 /differentialAmplifierCSA1/vcc1 /differentialAmplifierCSA1/vbuf1 20
+R78 /differentialAmplifierCSA1/vbuf2 /differentialAmplifierCSA1/vcc2 20
+R81 /vcsa1- VEE 2k
+R63 /vcsa1+ VEE 4k
+R82 VCC /differentialAmplifierCSA1/vcb 10k
+R83 /differentialAmplifierCSA1/vcb VEE 18k
+C35 /differentialAmplifierCSA1/vcb 0 10u
+R80 Net-_C36-Pad1_ /differentialAmplifierCSA1/vcoutp 20
+C32 Net-_C32-Pad1_ 0 10u
+R62 Net-_C32-Pad1_ /differentialAmplifierCSA1/vcoutm 20
+C36 Net-_C36-Pad1_ 0 10u
 .control
 options savecurrent
+options reltol=0.005
+options temp=-186
 tran 5ns 5us
+plot v("/vrx+") v("/vrx-")
+plot v("/differentialAmplifierBuffer/vbuf1")
+plot v("/differentialAmplifierBuffer/vcoutm")
+plot i(l.xu7.lc) i(l.xu12.lc)
+plot i(l.xu7.le) i(l.xu12.le)
 write
-plot v("/differentialAmplifierBuffer/vcoutp")
-plot v("/vbufout+")
-plot v("/vrx+")
 .endc
 .end

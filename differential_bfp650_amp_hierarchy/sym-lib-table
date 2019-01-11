@@ -2,4 +2,6 @@
   (lib (name BFP650)(type Legacy)(uri ${KIPRJMOD}/BFP650/BFP650.lib)(options "")(descr ""))
   (lib (name differential_bfp650_amp_hierarchy-rescue)(type Legacy)(uri ${KIPRJMOD}/differential_bfp650_amp_hierarchy-rescue.lib)(options "")(descr ""))
   (lib (name d_sipm)(type Legacy)(uri ${KIPRJMOD}/d_sipm.lib)(options "")(descr ""))
+  (lib (name differential_bfp650_amp-rescue)(type Legacy)(uri /users/phdgc/Downloads/differential_bfp650_amp.old/differential_bfp650_amp-rescue.lib)(options "")(descr ""))
+  (lib (name vcvs)(type Legacy)(uri /users/phdgc/Downloads/CryogenicDiffAmp/differential_bfp650_amp_hierarchy/vcvs.lib)(options "")(descr ""))
 )

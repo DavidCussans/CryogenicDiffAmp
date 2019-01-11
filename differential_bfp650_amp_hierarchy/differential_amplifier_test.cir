@@ -1,0 +1,39 @@
+.title KiCad schematic
+.include "Infineon-RFTransistor-SPICE.lib-SM-v02_10-EN.lib"
+.include "vcvs.cir"
+V1 /Vcm 0 dc -0.8
+V2 /vin- /Vcm dc 0 ac 10u pulse(0 1m 50n 1n 1n 50n)
+XE1 /vin+ /Vcm /vin- /Vcm VCVS
+V3 VCC 0 dc 7
+V4 0 VEE dc 7
+XU5 Net-_R13-Pad2_ /differentialAmplifier/Vb2 /differentialAmplifier/ve /differentialAmplifier/ve BFP650
+XU4 /differentialAmplifier/vcc2 /differentialAmplifier/vcb2 /differentialAmplifier/vce2 /differentialAmplifier/vce2 BFP650
+XU2 /differentialAmplifier/vcc1 /differentialAmplifier/vcb1 /differentialAmplifier/vce1 /differentialAmplifier/vce1 BFP650
+XU3 Net-_R6-Pad2_ /differentialAmplifier/Vb1 /differentialAmplifier/ve /differentialAmplifier/ve BFP650
+R5 VCC /differentialAmplifier/vcc1 1K
+R12 VCC /differentialAmplifier/vcc2 1K
+R9 /differentialAmplifier/ve VEE 1k
+R7 /vin- /differentialAmplifier/Vb1 10
+R11 /differentialAmplifier/Vb2 /vin+ 10
+R13 /differentialAmplifier/vce2 Net-_R13-Pad2_ 20
+R6 /differentialAmplifier/vce1 Net-_R6-Pad2_ 20
+R10 /differentialAmplifier/vcb2 /differentialAmplifier/vcb 20
+R8 /differentialAmplifier/vcb /differentialAmplifier/vcb1 20
+C3 VCC /differentialAmplifier/vcc2 25p
+C2 VCC /differentialAmplifier/vcc1 25p
+XU6 /differentialAmplifier/vcoutp Net-_R14-Pad1_ /vout- /vout- BFP650
+XU1 /differentialAmplifier/vcoutm /differentialAmplifier/vbuf1 /vout+ /vout+ BFP650
+R15 VCC Net-_C5-Pad1_ 100
+R1 VCC Net-_C1-Pad1_ 100
+R4 /differentialAmplifier/vcc1 /differentialAmplifier/vbuf1 20
+R14 Net-_R14-Pad1_ /differentialAmplifier/vcc2 20
+R17 /vout- VEE 8k
+R3 /vout+ VEE 8k
+R18 VCC /differentialAmplifier/vcb 10k
+R19 /differentialAmplifier/vcb VEE 18k
+C4 /differentialAmplifier/vcb 0 10u
+R16 Net-_C5-Pad1_ /differentialAmplifier/vcoutp 80
+C1 Net-_C1-Pad1_ 0 10u
+R2 Net-_C1-Pad1_ /differentialAmplifier/vcoutm 80
+C5 Net-_C5-Pad1_ 0 10u
+.end
