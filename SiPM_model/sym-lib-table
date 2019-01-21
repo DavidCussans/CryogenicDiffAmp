@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name pyopus)(type Legacy)(uri /Users/phdgc/Downloads/CryogenicDiffAmp.old/differential_bfp650_amp.old/differential_bfp650_csa/pyopus.lib)(options "")(descr ""))
+  (lib (name differential_bfp650_amp-cache)(type Legacy)(uri /Users/phdgc/Downloads/CryogenicDiffAmp.old/differential_bfp650_amp.old/differential_bfp650_amp-cache.lib)(options "")(descr ""))
+  (lib (name PSpiceSwitch)(type Legacy)(uri /Users/phdgc/Downloads/CryogenicDiffAmp/SiPM_model/PSpiceSwitch.lib)(options "")(descr ""))
+)

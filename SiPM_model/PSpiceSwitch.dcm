@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP PSpiceSwitch
+D PSpice Switch
+K switch lever
+$ENDCMP
+#
+#End Doc Library
