@@ -1,0 +1,5 @@
+.SUBCKT VCSW  1 2 3 4
+* SXXXXXXX N+ N- NC+ NC- MODEL OFF  
+.model MYSW SW (Ron=0.1 Roff=1000Meg Vt=.4 Vh=-.0)
+Switch 1 2 3 4 MYSW OFF
+.ends

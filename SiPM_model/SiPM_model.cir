@@ -1,0 +1,16 @@
+.title KiCad schematic
+Rqp1 /cathode /N002 {Rq / Np }
+Cqp1 /cathode /N002 {Cq * Np}
+Cdp1 /N002 /anode {Cd * Np}
+Rq1 /cathode /N001 {Rq / Nf }
+Cq1 /cathode /N001 {Cq * Nf}
+Cd1 /N001 /anode {Cd * Nf}
+Vbd1 /N006 /anode dc 70
+Vtr1 NC_01 /N006 dc 400m
+Rd1 /N006 /N004 {Rd/Nf}
+Cg1 /cathode /anode {Cg}
+SQuench1 /N001 /N004 NC_02 PSpiceSwitch
+STrigger1 /N001 /N004 NC_03 PSpiceSwitch
+.subckt sipmt  /anode /cathode /ph cd=80f cq=8f cm=59p cg=59p rd=1k rq=300k nf=1 np=3599 ith=100u vbd=70.5
+.ends
+.end
