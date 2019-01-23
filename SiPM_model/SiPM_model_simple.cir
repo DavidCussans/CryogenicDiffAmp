@@ -1,0 +1,13 @@
+.SUBCKT SiPMT  /anode /cathode  Cd=80f Cq=8f Cm=59p Cg=59p Rd=1k Rq=300k Nf=1 Np=3599
+* .title KiCad schematic
+Rqp1 /cathode /N002 {Rq / Np }
+Cqp1 /cathode /N002 {Cq * Np}
+Cdp1 /N002 /anode {Cd * Np}
+Rq1 /cathode /N001 {Rq / Nf }
+Cq1 /cathode /N001 {Cq * Nf}
+Cd1 /N001 /anode {Cd * Nf}
+Cg1 /cathode /anode {Cg}
+I1 /N001 /anode ac 1 pulse(0 0.08m 50n 1n 1n 1n)
+
+.ends
+

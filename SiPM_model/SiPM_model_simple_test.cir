@@ -1,0 +1,5 @@
+.title KiCad schematic
+.include "SiPM_model_simple.cir"
+XD1 /vsignal 0 SiPMT
+R1 /vsignal 0 10
+.end

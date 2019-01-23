@@ -1,0 +1,6 @@
+.SUBCKT amp 1 2 3 gain=1000
+
+* Crude amplifier based on voltage controlled voltage source. Infinite bandwidth
+E_AMP 3 0 1 2 {gain}
+
+.ends
